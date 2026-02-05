@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Problem Checker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Car Problem Checker</h1>
+
+    <form method="POST">
+        <select name="problem">
+            <option value="brake_noise">Screeching noise while braking</option>
+            <option value="engine_overheat">Engine overheating</option>
+            <option value="battery_issue">Car won’t start (battery)</option>
+            <option value="vibration">Steering wheel vibration</option>
+            <option value="ac_not_cooling">AC not cooling properly</option>                                 
+            <option value="smoke_exhaust">Smoke from exhaust</option>
+<option value="poor_mileage">Poor fuel mileage</option>
+<option value="hard_steering">Steering feels heavy</option>
+</select>
+
+        <button type="submit" onclick="delaySubmit(event)">Diagnose with AI</button>
+<p id="loader" style="display:none; margin-top:10px;">
+🤖 AI engine analyzing your car issue...
+</p>
+    </form>
+
+    {% if result %}
+    <div class="result">
+        <p>{{ result }}</p>
+    </div>
+    {% endif %}
+
+</div>
+<script>
+function delaySubmit(e) {
+    e.preventDefault();
+    document.getElementById("loader").style.display = "block";
+    setTimeout(() => {
+        e.target.closest("form").submit();
+    }, 1000); // 1 second fake thinking
+}
+</script>
+</body>
+</html>
