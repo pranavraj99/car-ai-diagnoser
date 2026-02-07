@@ -71,13 +71,16 @@ Ask your mechanic: Check for leaks in steering system."""
 }
 
 
+from flask import Flask, render_template, request, redirect, url_for
+
 @app.route("/", methods=["GET", "POST"])
 def index():
-    result = None
-
     if request.method == "POST":
         problem = request.form.get("problem")
-        result = PROBLEMS.get(problem)
+        return redirect(url_for("index", problem=problem))
+
+    problem = request.args.get("problem")
+    result = PROBLEMS.get(problem) if problem else None
 
     return render_template("index.html", result=result)
 
